@@ -5,16 +5,19 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.tag import pos_tag
 import nltk
-nltk.data.path.append('C:/Users/janki/AppData/Roaming/nltk_data')
-nltk.download('punkt_tab')
-nltk.download('averaged_perceptron_tagger_eng')
+nltk.data.path.append('C:/Users/janki/nltk_data')  
+nltk.download('punkt')
 
-df = pd.read_csv('../1-exploratory-analysis/data/PROMISE_exp.csv', sep=',', header=0, quotechar = '"', doublequote=True)
 
+# df = pd.read_csv('../1-exploratory-analysis/data/PROMISE_exp.csv', sep=',', header=0, quotechar = '"', doublequote=True)
+print("Hey")
+df = pd.read_csv('D:/PromiseDataset/se-requirements-classification/1-exploratory-analysis/data/PROMISE_exp.csv',sep=',', header=0, quotechar = '"', doublequote=True)
+df.head()
 # remove the project information as the project does not ulitize it at all
 del df['ProjectID']
 
 def process_requirement_text(text):
+	print("Function started")
 	tokens = word_tokenize(text.lower())
 
 	resulting_words = []
@@ -36,3 +39,4 @@ def process_requirement_text(text):
 df['RequirementText'] = df['RequirementText'].apply(process_requirement_text)
 
 df.to_csv('./output/dataset_normalized.csv', sep=',', header=True, index=False, quotechar = '"', doublequote=True)
+
